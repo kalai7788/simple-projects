@@ -1,0 +1,99 @@
+//create live font style preview
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Font Style Preview</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding-top: 50px;
+      background-color:cadetblue
+    }
+
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+
+    #preview {
+      margin-top: 30px;
+      font-size: 28px;
+      color: rgb(0, 0, 0);
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      min-width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1> Live Font Style Preview</h1>
+
+  
+  <input type="text" id="myInput" placeholder="Type your text..." oninput="updatePreview()" />
+
+  
+  <select id="fontSelect" onchange="updatePreview()">
+    <option value="Arial">Arial</option>
+    <option value="Courier New">Courier New</option>
+    <option value="Georgia">Georgia</option>
+    <option value="Times New Roman">Times New Roman</option>
+    <option value="Verdana">Verdana</option>
+    <option value="Comic Sans MS">Comic Sans MS</option>
+  </select>
+
+  
+  <button onclick="copyText()">📋 Copy Text</button>
+  
+  <br>
+
+  <div id="preview">Your text will appear here...</div>
+
+  <script>
+    function updatePreview() {
+      const text = document.getElementById("myInput").value;
+      const selectedFont = document.getElementById("fontSelect").value;
+      
+      const preview = document.getElementById("preview");
+      preview.innerText = text;
+      preview.style.fontFamily = selectedFont;
+    }
+
+    function copyText() {
+      const preview = document.getElementById("preview");
+      const textToCopy = preview.innerText;
+if(textToCopy){
+    console.log("Text to copy:", textToCopy)
+}
+else{
+    alert("please copy your text first")
+}
+
+      const tempInput = document.createElement("input");
+      tempInput.value = textToCopy;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      
+
+      alert("Text copied to clipboard!");
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
